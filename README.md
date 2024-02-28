@@ -62,9 +62,8 @@
 * [Kafdrop](https://hub.docker.com/r/obsidiandynamics/kafdrop)
 
 #### Full configuration
-* [Kafka](https://hub.docker.com/r/confluentinc/cp-zookeeper)
+* [Kafka](https://hub.docker.com/r/confluentinc/cp-server)
 * [Zookeeper](https://hub.docker.com/r/wurstmeister/zookeeper)
-* [CP Server](https://hub.docker.com/r/confluentinc/cp-server)
 * [Schema Registry](https://hub.docker.com/r/confluentinc/cp-schema-registry)
 * [Control Center](https://hub.docker.com/r/confluentinc/cp-enterprise-control-center)
 * Connect

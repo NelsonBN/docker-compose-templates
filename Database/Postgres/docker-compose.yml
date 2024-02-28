@@ -1,0 +1,36 @@
+version: "3.9"
+
+networks:
+  demo:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:16.2
+    container_name: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: a123456789
+      POSTGRES_DB: demo
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/initdb.sql
+    networks:
+      - demo
+
+  pgadmin:
+    image: dpage/pgadmin4:8.3
+    container_name: pgadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.com
+      PGADMIN_DEFAULT_PASSWORD: a123456789
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    networks:
+      - demo
+    depends_on:
+      - postgres

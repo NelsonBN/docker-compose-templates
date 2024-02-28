@@ -1,0 +1,30 @@
+version: "3.9"
+
+networks:
+  demo:
+    driver: bridge
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      MSSQL_PID: Developer
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Ab123456!
+    ports:
+      - 1433:1433
+    networks:
+      - demo
+
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: mssqltools
+    volumes:
+      - ./init-db.sql:/tmp/init-db.sql
+      - ./init-db.sh:/tmp/init-db.sh
+    command: /bin/bash ./tmp/init-db.sh
+    networks:
+      - demo
+    depends_on:
+      - sqlserver

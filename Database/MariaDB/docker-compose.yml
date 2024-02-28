@@ -1,0 +1,36 @@
+version: "3.9"
+
+networks:
+  demo:
+    driver: bridge
+
+services:
+  mariadb:
+    image: mariadb:11.3.2
+    container_name: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: a123456789
+      MYSQL_DATABASE: demo
+    volumes:
+      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    networks:
+      - demo
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mariadb # Your MariaDB container name
+      PMA_USER: root # Your MariaDB user
+      PMA_PASSWORD: a123456789 # Your MariaDB password
+      PMA_ARBITRARY: 1 # Allows entering database server, username and password manually
+    networks:
+      - demo
+    depends_on:
+      - mariadb

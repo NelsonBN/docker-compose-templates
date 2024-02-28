@@ -1,0 +1,36 @@
+version: "3.9"
+
+networks:
+  demo:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: a123456789
+      MYSQL_DATABASE: demo
+    volumes:
+      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    networks:
+      - demo
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql # Your MySQL container name
+      PMA_USER: root # Your MySQL user
+      PMA_PASSWORD: a123456789 # Your MySQL password
+      PMA_ARBITRARY: 1 # Allows entering database server, username and password manually
+    networks:
+      - demo
+    depends_on:
+      - mysql

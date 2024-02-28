@@ -1,0 +1,21 @@
+version: "3.9"
+
+networks:
+  demo:
+    driver: bridge
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1.54
+    container_name: jaeger
+    restart: always
+    ports:
+      #      - 6831:6831/udp # jaeger-agent
+      - 16686:16686 # jaeger-ui
+      - 14269:14269 # jaeger-collector
+      - 4317:4317 # jaeger-collector - grpc OTLP
+      - 4318:4318 # jaeger-collector - http OTLP
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+    networks:
+      - demo

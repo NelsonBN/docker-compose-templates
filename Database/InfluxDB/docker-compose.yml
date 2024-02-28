@@ -1,0 +1,41 @@
+version: "3.9"
+
+networks:
+  demo:
+    driver: bridge
+
+services:
+  influxdb:
+    image: influxdb:1.8.10
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    environment:
+      INFLUXDB_DB: demo
+    #    volumes:
+    #      - ./out/influxdb:/var/lib/influxdb
+    networks:
+      - demo
+
+  grafana:
+    image: grafana/grafana:10.2.4
+    container_name: grafana
+    environment:
+      #      GF_SECURITY_ADMIN_USER: admin
+      #      GF_SECURITY_ADMIN_PASSWORD: a123456789
+      TZ: Europe/Lisbon
+      GF_AUTH_ANONYMOUS_ENABLED: true # Allow anonymous access
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # Set the role for anonymous users to Admin
+      GF_AUTH_BASIC_ENABLED: false # Disable basic auth
+    ports:
+      - 3000:3000
+    volumes:
+      - ./Grafana/data-source.yml:/etc/grafana/provisioning/datasources/data-source.yml # Data source configurations
+      - ./Grafana/dashboards:/etc/grafana/provisioning/dashboards # Folder containing dashboards
+      - ./Grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml # Dashboard configurations
+    #      - ./out/grafana:/var/lib/grafana
+    networks:
+      - demo
+    depends_on:
+      - influxdb

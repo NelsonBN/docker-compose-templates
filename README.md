@@ -55,6 +55,20 @@
 * [RabbitMQ](https://hub.docker.com/_/rabbitmq)
 
 ### Kafka
-* [Kafka](https://hub.docker.com/r/wurstmeister/kafka)
+
+#### Simple configuration
+* [Kafka](https://hub.docker.com/r/confluentinc/cp-zookeeper)
 * [Zookeeper](https://hub.docker.com/r/wurstmeister/zookeeper)
 * [Kafdrop](https://hub.docker.com/r/obsidiandynamics/kafdrop)
+
+#### Full configuration
+* [Kafka](https://hub.docker.com/r/confluentinc/cp-zookeeper)
+* [Zookeeper](https://hub.docker.com/r/wurstmeister/zookeeper)
+* [CP Server](https://hub.docker.com/r/confluentinc/cp-server)
+* [Schema Registry](https://hub.docker.com/r/confluentinc/cp-schema-registry)
+* [Control Center](https://hub.docker.com/r/confluentinc/cp-enterprise-control-center)
+* Connect
+* [ksqldb server](https://hub.docker.com/r/confluentinc/cp-ksqldb-server)
+* [ksqldb cli](https://hub.docker.com/r/confluentinc/cp-ksqldb-cli)
+* [ksql-datagen](https://hub.docker.com/r/confluentinc/ksqldb-examples)
+* [REST Proxy](https://hub.docker.com/r/confluentinc/cp-kafka-rest)

@@ -22,6 +22,9 @@
 ### SQL Server
 * [SQL Server](https://hub.docker.com/_/microsoft-mssql-server)
 
+### Cassandra
+* [Cassandra](https://hub.docker.com/_/cassandra)
+
 ### InfluxDB
 * [InfluxDB](https://hub.docker.com/_/influxdb)
 * [Grafana](https://hub.docker.com/r/grafana/grafana)

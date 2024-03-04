@@ -29,6 +29,12 @@
 * [InfluxDB](https://hub.docker.com/_/influxdb)
 * [Grafana](https://hub.docker.com/r/grafana/grafana)
 
+### CosmosDB NoSQL Emulator
+* [CosmosDB](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=windows%2Ccsharp&pivots=api-nosql)
+
+### CosmosDB MongoDB Emulator
+* [CosmosDB](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=windows%2Ccsharp&pivots=api-mongodb)
+
 
 ## Observability
 

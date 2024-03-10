@@ -77,3 +77,10 @@
 * [ksqldb cli](https://hub.docker.com/r/confluentinc/cp-ksqldb-cli)
 * [ksql-datagen](https://hub.docker.com/r/confluentinc/ksqldb-examples)
 * [REST Proxy](https://hub.docker.com/r/confluentinc/cp-kafka-rest)
+
+
+## Storage
+
+### Azure Blob Storage Emulator (Azurite)
+* [Azurite](https://hub.docker.com/_/microsoft-azure-storage-azurite)
+* [Azure CLI](https://hub.docker.com/_/microsoft-azure-cli)

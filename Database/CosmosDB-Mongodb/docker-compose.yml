@@ -13,6 +13,7 @@ services:
       - AZURE_COSMOS_EMULATOR_PARTITION_COUNT=3 # Specify the number of partitions to use. (Optional)
       - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true # Enable data persistence between emulator runs. (Optional)
       # - AZURE_COSMOS_EMULATOR_IP_ADDRESS_OVERRIDE= # Override the emulator's default IP address. (Optional)
+      - AZURE_COSMOS_EMULATOR_ENABLE_MONGODB_ENDPOINT=4.0
     ports:
       - 8081:8081 # Data Explorer
       - 10250-10255:10250-10255 # Ports used by the emulator

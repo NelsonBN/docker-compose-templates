@@ -16,6 +16,11 @@ services:
       MYSQL_DATABASE: demo
     volumes:
       - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 3s
+      timeout: 2s
+      retries: 20
     networks:
       - demo
     # command: --default-authentication-plugin=mysql_native_password
@@ -34,4 +39,5 @@ services:
     networks:
       - demo
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy

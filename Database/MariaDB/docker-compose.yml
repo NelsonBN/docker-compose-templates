@@ -16,6 +16,11 @@ services:
       MYSQL_DATABASE: demo
     volumes:
       - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+      interval: 3s
+      timeout: 2s
+      retries: 20
     networks:
       - demo
 
@@ -33,4 +38,5 @@ services:
     networks:
       - demo
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy

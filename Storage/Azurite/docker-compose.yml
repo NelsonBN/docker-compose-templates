@@ -16,10 +16,10 @@ services:
     #   - ./azurite-blob:/data
     # required, see https://github.com/Azure/Azurite/issues/1666
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:10000", "||", "exit", "1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: nc localhost 10000 -z
+      interval: 5s
+      timeout: 3s
+      retries: 20
     networks:
       - demo
 
@@ -35,14 +35,11 @@ services:
       - -c
       - >-
         (echo "########################## CREATING BLOB... ##########################" &&
-        echo "#### Waiting for Azurite to be ready..." &&
-        sleep 2 &&
         echo "#### Attempting to create Blob container..." &&
         az storage container create --name $$BLOB_CONTAINER_NAME --connection-string $$AZURE_STORAGE_CONNECTION_STRING &&
         echo "########################## BLOB CREATED ##########################")
     networks:
       - demo
     depends_on:
-      - azurite
-      # azurite:
-      #   condition: service_healthy
+      azurite:
+        condition: service_healthy

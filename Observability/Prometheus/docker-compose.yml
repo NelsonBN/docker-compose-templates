@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   demo:
@@ -16,7 +16,7 @@ services:
       - demo
 
   grafana:
-    image: grafana/grafana:10.2.4
+    image: grafana/grafana:10.4.2
     container_name: grafana
     environment:
       TZ: Europe/Lisbon

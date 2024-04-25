@@ -43,6 +43,7 @@
 * [Grafana](https://hub.docker.com/r/grafana/grafana)
 
 ### Grafana Loki
+[See](./Observability/GrafanaLoki/README.md)
 * [Loki](https://hub.docker.com/r/grafana/loki)
 * [Promtail](https://hub.docker.com/r/grafana/promtail)
 * [Grafana](https://hub.docker.com/r/grafana/grafana)

@@ -1,0 +1,54 @@
+version: "3.9"
+
+networks:
+  demo:
+    name: demo
+    driver: bridge
+
+services:
+  loki:
+    image: grafana/loki:2.9.7
+    container_name: loki
+    ports:
+      - 3100:3100
+    command:
+      - -config.file=/etc/loki/loki-config.yaml
+      - -print-config-stderr=true
+    volumes:
+      - "./loki:/etc/loki"
+    networks:
+      - demo
+
+  promtail:
+    image: grafana/promtail:2.9.7
+    container_name: promtail
+    ports:
+      - 9080:9080
+    command:
+      - -config.file=/etc/promtail/config.yaml
+    volumes:
+      - ./Promtail/config.yaml:/etc/promtail/config.yaml
+      - ./demo-logs:/var/demo-logs
+    depends_on:
+      - loki
+    networks:
+      - demo
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: grafana
+    environment:
+      TZ: Europe/Lisbon
+      GF_AUTH_ANONYMOUS_ENABLED: true # Allow anonymous access
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # Set the role for anonymous users to Admin
+      GF_AUTH_BASIC_ENABLED: false # Disable basic auth
+    ports:
+      - 3000:3000
+    volumes:
+      - ./Grafana/data-source.yml:/etc/grafana/provisioning/datasources/data-source.yml # Data source configurations
+      - ./Grafana/dashboards:/etc/grafana/provisioning/dashboards # Folder containing dashboards
+      - ./Grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml # Dashboard configurations
+    networks:
+      - demo
+    depends_on:
+      - loki

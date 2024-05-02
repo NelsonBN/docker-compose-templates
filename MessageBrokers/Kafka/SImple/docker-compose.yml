@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   demo:
@@ -6,7 +6,7 @@ networks:
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.6.0
+    image: confluentinc/cp-zookeeper:7.6.1
     container_name: zookeeper
     ports:
       - 2181:2181
@@ -17,7 +17,7 @@ services:
       - demo
 
   kafka:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     container_name: kafka
     ports:
       - 9092:9092
@@ -48,7 +48,7 @@ services:
     image: obsidiandynamics/kafdrop:4.0.1
     container_name: kafdrop
     ports:
-      - 19000:9000
+      - 9000:9000
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
     networks:

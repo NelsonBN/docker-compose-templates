@@ -20,7 +20,7 @@ services:
       - demo
 
   pgadmin:
-    image: dpage/pgadmin4:8.3
+    image: dpage/pgadmin4:8.6
     container_name: pgadmin
     restart: always
     ports:

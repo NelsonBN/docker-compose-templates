@@ -19,6 +19,7 @@ services:
       - demo
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
-      interval: 5s
-      timeout: 10s
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
       retries: 5

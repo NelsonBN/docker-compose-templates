@@ -1,0 +1,28 @@
+@Host = http://localhost:3100
+
+
+######### STATUS ENDPOINTS #########
+# https://grafana.com/docs/loki/latest/reference/loki-http-api/#status-endpoints
+
+### Ready
+GET {{Host}}/ready
+
+
+### Log Level
+GET {{Host}}/log_level
+
+
+### Metrics
+GET {{Host}}/metrics
+
+
+### Config
+GET {{Host}}/config
+
+
+### Services
+GET {{Host}}/services
+
+
+### Buildinfo
+GET {{Host}}/loki/api/v1/status/buildinfo

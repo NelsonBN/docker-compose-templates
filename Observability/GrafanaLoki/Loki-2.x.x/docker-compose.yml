@@ -9,8 +9,10 @@ services:
   loki:
     image: grafana/loki:2.9.7
     container_name: loki
+    restart: always
     ports:
-      - 3100:3100
+      - 3100:3100 # http
+      - 3101:3101 # grpc
     command:
       - -config.file=/etc/loki/loki-config.yaml
       - -print-config-stderr=true
@@ -18,6 +20,20 @@ services:
       - "./loki:/etc/loki"
     networks:
       - demo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3100/ready",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 15s
+      retries: 5
 
   promtail:
     image: grafana/promtail:2.9.7
@@ -30,7 +46,8 @@ services:
       - ./Promtail/config.yaml:/etc/promtail/config.yaml
       - ./demo-logs:/var/demo-logs
     depends_on:
-      - loki
+      loki:
+        condition: service_healthy
     networks:
       - demo
 
@@ -51,4 +68,5 @@ services:
     networks:
       - demo
     depends_on:
-      - loki
+      loki:
+        condition: service_healthy

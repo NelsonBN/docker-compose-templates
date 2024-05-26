@@ -8,12 +8,30 @@ services:
   prometheus:
     image: prom/prometheus:v2.52.0
     container_name: prometheus
+    restart: always
     volumes:
       - ./Prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml" # By default
+      - "--web.enable-lifecycle" # Enable reload of configuration
     networks:
       - demo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9090/-/healthy",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
+      retries: 5
 
   grafana:
     image: grafana/grafana:10.4.2
@@ -32,4 +50,5 @@ services:
     networks:
       - demo
     depends_on:
-      - prometheus
+      prometheus:
+        condition: service_healthy

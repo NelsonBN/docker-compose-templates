@@ -1,0 +1,43 @@
+# https://prometheus.io/docs/prometheus/latest/management_api
+
+@Host = http://localhost:9090
+
+
+######### HEALTH CHECK #########
+
+
+GET {{Host}}/-/healthy
+
+###
+
+HEAD {{Host}}/-/healthy
+
+
+######### READINESS CHECK #########
+
+
+GET {{Host}}/-/ready
+
+###
+
+HEAD {{Host}}/-/ready
+
+
+######### READINESS CHECK #########
+# Disable by default
+
+PUT {{Host}}/-/reload
+
+###
+
+POST {{Host}}/-/reload
+
+
+######### READINESS CHECK #########
+# Disable by default
+
+PUT {{Host}}/-/quit
+
+###
+
+POST {{Host}}/-/quit

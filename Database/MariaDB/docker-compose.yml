@@ -1,5 +1,3 @@
-version: '3.8'
-
 networks:
   demo:
     driver: bridge
@@ -18,7 +16,14 @@ services:
       - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
     healthcheck:
       # https://mariadb.org/mariadb-server-docker-official-images-healthcheck-without-mysqladmin/
-      test: ["CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
       interval: 3s
       timeout: 2s
       retries: 20

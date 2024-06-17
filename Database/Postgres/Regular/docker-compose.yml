@@ -12,15 +12,21 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: a123456789
       POSTGRES_DB: demo
+      POSTGRES_USER: demouser
+      POSTGRES_PASSWORD: a123456789
     volumes:
       - ./database.sql:/docker-entrypoint-initdb.d/initdb.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "demo", "-U", "demouser"]
+      interval: 15s
+      timeout: 30s
+      retries: 5
     networks:
       - demo
 
   pgadmin:
-    image: dpage/pgadmin4:8.6
+    image: dpage/pgadmin4:8.8
     container_name: pgadmin
     restart: always
     ports:
@@ -33,4 +39,5 @@ services:
     networks:
       - demo
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy

@@ -1,0 +1,12 @@
+{
+  "Servers": {
+      "1": {
+      "Name": "Localhost",
+      "Group": "Localhost Group",
+      "Port": 5432,
+      "Username": "demouser",
+      "Host": "postgres",
+      "MaintenanceDB": "postgres"
+      }
+  }
+}

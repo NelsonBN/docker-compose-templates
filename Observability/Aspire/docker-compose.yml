@@ -1,0 +1,15 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+
+  aspire:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:8.1.0-amd64
+    container_name: aspire-dashboard
+    restart: always
+    ports:
+      - 18888:18888 # Web UI
+      - 4317:18889 # grpc OTLP
+    networks:
+      - demo

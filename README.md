@@ -36,6 +36,10 @@
 ### CosmosDB MongoDB Emulator
 * [CosmosDB](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=windows%2Ccsharp&pivots=api-mongodb)
 
+### Redis
+* [Redis](https://hub.docker.com/_/redis)
+* [Redis Insight](https://hub.docker.com/r/redislabs/redisinsight)
+
 
 ## Observability
 

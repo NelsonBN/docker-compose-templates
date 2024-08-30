@@ -1,0 +1,37 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:7.4.0-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - demo
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
+      retries: 5
+
+  redis-insight:
+    image: redislabs/redisinsight:2.54.0
+    container_name: redis-insight
+    restart: always
+    ports:
+      - 5540:5540
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - demo
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5540/api/health", "||", "exit 1"]
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
+      retries: 5

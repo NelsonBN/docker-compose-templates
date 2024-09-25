@@ -1,0 +1,16 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    container_name: grafana
+    environment:
+      TZ: Europe/Lisbon
+      GF_AUTH_ANONYMOUS_ENABLED: true # Allow anonymous access
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # Set the role for anonymous users to Admin
+      GF_AUTH_BASIC_ENABLED: false # Disable basic auth
+    ports:
+      - 3000:3000

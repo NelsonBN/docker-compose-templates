@@ -43,6 +43,9 @@
 
 ## Observability
 
+### Grafana
+* [Grafana](https://hub.docker.com/r/grafana/grafana)
+
 ### Prometheus
 * [Prometheus](https://hub.docker.com/r/prom/prometheus)
 * [Grafana](https://hub.docker.com/r/grafana/grafana)

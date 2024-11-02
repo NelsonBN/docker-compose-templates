@@ -1,0 +1,17 @@
+services:
+  sftp-server:
+    image: atmoz/sftp:alpine
+    container_name: sftp-server
+    restart: always
+    environment:
+      # <username1>:<password1>:<uid1>:<gid1>:<dir1_1>,<dir1_2>{space}<username2>:<password2>:<uid2>:<gid2>:<dir2_1>,<dir2_2>
+      SFTP_USERS: demouser:demopass:::inbox,sent mockuser:mockpass:::mock-inbox,mock-sent fakeuser:fakepass:::fake-inbox,fake-sent
+    volumes:
+      - ./data/demouser/inbox:/home/demouser/inbox
+      - ./data/demouser/sent:/home/demouser/sent
+      - ./data/mockuser/mock-inbox:/home/mockuser/mock-inbox
+      - ./data/mockuser/mock-sent:/home/mockuser/mock-sent
+      - ./data/fakeuser/fake-inbox:/home/fakeuser/fake-inbox
+      - ./data/fakeuser/fake-sent:/home/fakeuser/fake-sent
+    ports:
+      - 22:22

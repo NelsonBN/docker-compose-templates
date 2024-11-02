@@ -18,10 +18,6 @@
 - [Kafka](/Kafka/README.md)
 
 
-## Storage
-- [Azurite](/Azurite/README.md)
-
-
 ## Observability
 - [Grafana](/Grafana/README.md)
 - [Prometheus](/Prometheus/README.md)
@@ -29,3 +25,12 @@
 - [Grafana Tempo](/GrafanaTempo/README.md)
 - [Jaeger](/Jaeger/README.md)
 - [Microsoft Aspire Dashboard](/Aspire/README.md)
+
+
+## Emulators
+
+### Storage
+- [Azurite](/Azurite/README.md)
+
+### sFTP
+- [AtmozSFTP](/AtmozSFTP/README.md)

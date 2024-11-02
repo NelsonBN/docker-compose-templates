@@ -1,0 +1,17 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+
+  mailpit:
+    image: axllent/mailpit:v1.20.2
+    container_name: mailpit
+    restart: always
+    ports:
+      - 8025:8025 # HTTP
+      - 1025:1025 # SMTP
+    environment:
+      TZ: Europe/Lisbon
+    networks:
+      - demo

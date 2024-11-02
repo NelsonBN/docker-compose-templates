@@ -34,3 +34,6 @@
 
 ### sFTP
 - [AtmozSFTP](/AtmozSFTP/README.md)
+
+### Email
+- [Mailpit](/Mailpit/README.md)

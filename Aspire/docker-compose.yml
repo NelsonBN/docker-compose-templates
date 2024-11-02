@@ -5,9 +5,11 @@ networks:
 services:
 
   aspire:
-    image: mcr.microsoft.com/dotnet/aspire-dashboard:8.1.0-amd64
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:8.2.1-amd64
     container_name: aspire-dashboard
     restart: always
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: true
     ports:
       - 18888:18888 # Web UI
       - 4317:18889 # grpc OTLP

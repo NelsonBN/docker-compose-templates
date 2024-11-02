@@ -1,9 +1,4 @@
-networks:
-  demo:
-    driver: bridge
-
 services:
-
   mailpit:
     image: axllent/mailpit:v1.21.1
     container_name: mailpit
@@ -13,5 +8,3 @@ services:
       - 1025:1025 # SMTP
     environment:
       TZ: Europe/Lisbon
-    networks:
-      - demo

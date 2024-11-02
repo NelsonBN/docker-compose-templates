@@ -1,15 +1,9 @@
-networks:
-  demo:
-    driver: bridge
-
 services:
   cassandra:
     image: cassandra:4.1.4
     container_name: cassandra
     ports:
       - 9042:9042
-    networks:
-      - demo
     # environment:
     #   - CASSANDRA_CLUSTER_NAME=myCassandraCluster
     #   - CASSANDRA_DC=myDataCenter

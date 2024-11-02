@@ -1,7 +1,3 @@
-networks:
-  demo:
-    driver: bridge
-
 services:
 
   grafana:

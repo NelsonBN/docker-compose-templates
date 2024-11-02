@@ -1,7 +1,3 @@
-networks:
-  demo:
-    driver: bridge
-
 services:
 
   aspire:
@@ -13,5 +9,3 @@ services:
     ports:
       - 18888:18888 # Web UI
       - 4317:18889 # grpc OTLP
-    networks:
-      - demo

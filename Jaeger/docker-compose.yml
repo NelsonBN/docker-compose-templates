@@ -1,7 +1,3 @@
-networks:
-  demo:
-    driver: bridge
-
 services:
   jaeger:
     image: jaegertracing/all-in-one:1.60.0
@@ -15,5 +11,3 @@ services:
       - 4318:4318 # jaeger-collector - http OTLP
     environment:
       COLLECTOR_OTLP_ENABLED: true
-    networks:
-      - demo

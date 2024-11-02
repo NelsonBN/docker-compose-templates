@@ -1,0 +1,38 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  mautic:
+    image: mautic/mautic:5.1.1-apache
+    container_name: mautic
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - MAUTIC_DB_HOST=mysql
+      - MAUTIC_DB_USER=root
+      - MAUTIC_DB_PASSWORD=a123456789
+      - MAUTIC_DB_NAME=mautic
+    networks:
+      - demo
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: a123456789
+      MYSQL_DATABASE: mautic
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 3s
+      timeout: 2s
+      retries: 20
+    networks:
+      - demo

@@ -5,7 +5,7 @@
 ## Azure Blob Storage Emulator (Azurite)
 
 ### Images
-- [Mailpit](https://hub.docker.com/_/microsoft-azure-storage-azurite)
+- [Mailpit](https://hub.docker.com/r/axllent/mailpit)
 
 ### [Docker compose file](/Mailpit/docker-compose.yml)
 

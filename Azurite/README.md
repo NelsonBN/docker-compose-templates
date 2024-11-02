@@ -9,3 +9,6 @@
 - [Azure CLI](https://hub.docker.com/_/microsoft-azure-cli)
 
 ### [Docker compose file](/Azurite/docker-compose.yml)
+
+### References
+- [GitHub](https://github.com/Azure/Azurite)

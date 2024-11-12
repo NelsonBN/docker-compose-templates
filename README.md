@@ -28,8 +28,6 @@
 
 
 ## Operating Systems
-
-### macOS
 - [macOS](/macOS/README.md)
 
 

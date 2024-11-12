@@ -5,7 +5,7 @@
 ## macOS - Emulator
 
 ### Images
-- [macOS](https://hub.docker.com/r/axllent/mailpit)
+- [macOS](https://hub.docker.com/r/dockurr/macos)
 
 ### [Docker compose file](/macOS/docker-compose.yml)
 

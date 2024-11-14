@@ -1,6 +1,6 @@
 services:
   mailpit:
-    image: axllent/mailpit:v1.21.1
+    image: axllent/mailpit:v1.21.2
     container_name: mailpit
     restart: always
     ports:

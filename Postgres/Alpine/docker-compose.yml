@@ -15,27 +15,37 @@ services:
       POSTGRES_PASSWORD: a123456789
     volumes:
       - ./database.sql:/docker-entrypoint-initdb.d/initdb.sql
+    networks:
+      - demo
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "demo", "-U", "demouser"]
       interval: 15s
       timeout: 30s
       retries: 5
-    networks:
-      - demo
 
-  pgadmin:
-    image: dpage/pgadmin4:8.13.0
-    container_name: pgadmin
+  pgweb:
+    image: sosedoff/pgweb:0.16.2
+    container_name: pgweb
     restart: always
     ports:
-      - 8080:80
+      - 8081:8081
     environment:
-      PGADMIN_DEFAULT_EMAIL: test@test.com
-      PGADMIN_DEFAULT_PASSWORD: a123456789
-    volumes:
-      - ./servers.json:/pgadmin4/servers.json
+      - PGWEB_DATABASE_URL=postgres://demouser:a123456789@postgres:5432/demo?sslmode=disable
     networks:
       - demo
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8081"
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5

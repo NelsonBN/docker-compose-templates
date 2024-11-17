@@ -15,13 +15,13 @@ services:
       POSTGRES_PASSWORD: a123456789
     volumes:
       - ./database.sql:/docker-entrypoint-initdb.d/initdb.sql
+    networks:
+      - demo
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "demo", "-U", "demouser"]
       interval: 15s
       timeout: 30s
       retries: 5
-    networks:
-      - demo
 
   pgadmin:
     image: dpage/pgadmin4:8.13.0

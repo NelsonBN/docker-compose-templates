@@ -1,0 +1,48 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:7.4.1-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - demo
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
+      retries: 5
+
+  redis-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+    container_name: redis-commander
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    user: redis
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - demo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8081"
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s

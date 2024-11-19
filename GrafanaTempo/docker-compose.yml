@@ -17,6 +17,20 @@ services:
     #      - 4318:4318  # otlp http
     networks:
       - demo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3200/ready",
+        ]
+      interval: 10s
+      timeout: 10s
+      start_period: 15s
+      retries: 10
 
   grafana:
     image: grafana/grafana:11.3.0
@@ -35,4 +49,5 @@ services:
     networks:
       - demo
     depends_on:
-      - tempo
+      tempo:
+        condition: service_healthy

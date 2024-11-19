@@ -1,0 +1,8 @@
+@Host = http://localhost:3200
+
+### Ready
+GET {{Host}}/ready
+
+
+### Metrics
+GET {{Host}}/metrics

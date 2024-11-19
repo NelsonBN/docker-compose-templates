@@ -16,6 +16,12 @@ services:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     networks:
       - demo
+    healthcheck:
+      test: ["CMD","mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
   mongo-express:
     image: mongo-express:1.0.2
@@ -34,4 +40,5 @@ services:
     networks:
       - demo
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy

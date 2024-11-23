@@ -1,0 +1,29 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  servicebus-emulator:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:1.0.1
+    container_name: servicebus-emulator
+    environment:
+      SQL_SERVER: sqledge
+      MSSQL_SA_PASSWORD: Ab123456789!
+      ACCEPT_EULA: Y
+    volumes:
+      - ./Config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
+    ports:
+      - 5672:5672
+    networks:
+      - demo
+    depends_on:
+      - sqledge
+
+  sqledge:
+    image: mcr.microsoft.com/azure-sql-edge:2.0.0
+    container_name: sqledge
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Ab123456789!
+    networks:
+      - demo

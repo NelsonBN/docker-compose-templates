@@ -24,5 +24,5 @@ telemetrygen traces --traces 2 --otlp-insecure --otlp-endpoint otel-tui:4317
 ```
 
 ### References
-- [GitHub](https://github.com/ymtdzzz/otel-tui)
-- [Telemetrygen GitGub](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/cmd/telemetrygen)
+- [GitHub - Otel-tui](https://github.com/ymtdzzz/otel-tui)
+- [GitHub - Telemetrygen](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/cmd/telemetrygen)

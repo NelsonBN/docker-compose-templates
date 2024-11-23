@@ -26,6 +26,7 @@
 - [Grafana Tempo](/GrafanaTempo/README.md)
 - [Jaeger](/Jaeger/README.md)
 - [Microsoft Aspire Dashboard](/Aspire/README.md)
+- [Otel-tui](/Otel-tui/README.md)
 
 
 ## Operating Systems

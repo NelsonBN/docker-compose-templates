@@ -14,6 +14,13 @@ services:
       - 1433:1433
     networks:
       - demo
+    healthcheck:
+      test: >
+        /bin/bash -c "echo > /dev/tcp/localhost/1433"
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
   mssqltools:
     image: mcr.microsoft.com/mssql-tools
@@ -25,4 +32,5 @@ services:
     networks:
       - demo
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy

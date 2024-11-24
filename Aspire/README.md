@@ -7,7 +7,7 @@
 ### Images
 - [Aspire Dashboard](https://hub.docker.com/r/microsoft/dotnet-aspire-dashboard/)
 
-### [Docker compose file](/Jaeger/docker-compose.yml)
+### [Docker compose file](/Aspire/docker-compose.yml)
 
 ### How can I use it?
 

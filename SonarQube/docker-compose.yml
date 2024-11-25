@@ -1,0 +1,40 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  sonarqube:
+    image: sonarqube:10.7.0-community
+    container_name: sonarqube
+    restart: always
+    ports:
+      - 9000:9000
+    environment:
+      - SONAR_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
+      - SONAR_JDBC_USERNAME=sonar
+      - SONAR_JDBC_PASSWORD=a123456789
+    # volumes:
+    #   - sonarqube_conf:/opt/sonarqube/conf
+    #   - sonarqube_data:/opt/sonarqube/data
+    #   - sonarqube_extensions:/opt/sonarqube/extensions
+    #   - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+    networks:
+      - demo
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:17.2-alpine3.20
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: a123456789
+    networks:
+      - demo
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q || exit 1"]
+      interval: 15s
+      timeout: 30s
+      retries: 5

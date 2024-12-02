@@ -21,6 +21,7 @@ docker attach otel-tui
 ```bash
 docker attach telemetrygen
 telemetrygen traces --traces 2 --otlp-insecure --otlp-endpoint otel-tui:4317
+telemetrygen metrics --duration 5s --otlp-insecure --otlp-endpoint otel-tui:4317
 ```
 
 ### References

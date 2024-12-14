@@ -1,0 +1,6 @@
+services:
+  nginx:
+    image: nginx:1.27.3
+    container_name: nginx
+    ports:
+      - 8080:80

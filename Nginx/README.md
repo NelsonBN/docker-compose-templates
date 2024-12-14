@@ -2,7 +2,7 @@
 [[Home]](/README.md)
 
 
-## Azure Blob Storage Emulator (Azurite)
+## Nginx
 
 ### Images
 - [Nginx](https://hub.docker.com/_/nginx)

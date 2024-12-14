@@ -30,6 +30,7 @@
 
 
 ## Operating Systems
+- [Ubuntu](/Ubuntu/README.md)
 - [macOS](/macOS/README.md)
 
 

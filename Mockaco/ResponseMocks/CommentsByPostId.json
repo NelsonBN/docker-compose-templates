@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "GET",
+    "route": "/comments",
+    "condition": "<#= Request.Query.ContainsKey("postId") == true #>"
+  },
+  "response": {
+    "status": "ok",
+    "body": [
+      {
+        "postId": "<#= Request.Query["postId"] #>",
+        "id": 1,
+        "name": "Fake name",
+        "email": "fake@gardner.tk",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      },
+      {
+        "postId": "<#= Request.Query["postId"] #>",
+        "id": 2,
+        "name": "Fake name 2",
+        "email": "mocker@gardner.tk",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit 2"
+      }
+    ]
+  }
+}

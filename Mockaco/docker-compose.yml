@@ -1,0 +1,24 @@
+services:
+  mockaco:
+    image: natenho/mockaco:1.9.9
+    container_name: mailpit
+    restart: always
+    ports:
+      - 5000:5000 # HTTP
+      - 5443:5443 # HTTPS
+    volumes:
+      - ./ResponseMocks:/app/Mocks
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:5000/_mockaco/ready",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
+      retries: 5

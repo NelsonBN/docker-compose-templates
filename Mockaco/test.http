@@ -1,0 +1,13 @@
+@host = http://localhost:5000
+
+### Health check
+
+GET {{host}}/_mockaco/ready
+
+### Demos
+
+GET {{host}}/comments
+
+###
+
+GET {{host}}/comments?postId=121

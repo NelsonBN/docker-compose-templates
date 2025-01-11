@@ -1,7 +1,7 @@
 services:
   mockaco:
     image: natenho/mockaco:1.9.9
-    container_name: mailpit
+    container_name: mockaco
     restart: always
     ports:
       - 5000:5000 # HTTP

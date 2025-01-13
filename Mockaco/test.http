@@ -1,8 +1,12 @@
 @host = http://localhost:5000
 
-### Health check
+### Health check - Ready
 
 GET {{host}}/_mockaco/ready
+
+### Health check - health
+
+GET {{host}}/_mockaco/health
 
 ### Demos
 

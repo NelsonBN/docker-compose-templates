@@ -4,7 +4,7 @@ networks:
 
 services:
   prometheus:
-    image: prom/prometheus:v3.0.1
+    image: prom/prometheus:v3.1.0
     container_name: prometheus
     restart: always
     volumes:
@@ -14,8 +14,8 @@ services:
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--web.enable-lifecycle" # Enable reload of configuration
-      - '--enable-feature=native-histograms'
-      - '--web.enable-otlp-receiver' # Enable OTLP receiver
+      - "--enable-feature=native-histograms"
+      - "--web.enable-otlp-receiver" # Enable OTLP receiver
     networks:
       - demo
     healthcheck:
@@ -26,7 +26,7 @@ services:
           "--quiet",
           "--tries=1",
           "--spider",
-          "http://localhost:9090/-/healthy"
+          "http://localhost:9090/-/healthy",
         ]
       interval: 10s
       timeout: 5s

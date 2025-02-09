@@ -3,7 +3,6 @@ networks:
     driver: bridge
 
 services:
-
   aspire:
     image: mcr.microsoft.com/dotnet/aspire-dashboard:8.2.1-amd64
     container_name: aspire-dashboard
@@ -17,7 +16,7 @@ services:
       - demo
 
   telemetrygen:
-    image: golang:1.22
+    image: golang:1.23.6
     container_name: telemetrygen
     stdin_open: true
     tty: true

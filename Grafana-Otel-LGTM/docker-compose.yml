@@ -3,7 +3,6 @@ networks:
     driver: bridge
 
 services:
-
   lgtm:
     image: grafana/otel-lgtm:0.8.0
     container_name: lgtm
@@ -15,7 +14,7 @@ services:
       - demo
 
   telemetrygen:
-    image: golang:1.22
+    image: golang:1.23.6
     container_name: telemetrygen
     stdin_open: true
     tty: true

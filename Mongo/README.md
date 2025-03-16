@@ -11,5 +11,5 @@
 ### [Docker compose file](/Mongo/docker-compose.yml)
 
 ### References
-- [Github - Mongo Express](https://github.com/mongo-express/mongo-express-docker)
+- [GitHub - Mongo Express](https://github.com/mongo-express/mongo-express-docker)
 - [Stack Overflow - Health Check](https://stackoverflow.com/questions/54384042/why-does-the-docker-compose-healthcheck-of-my-mongo-container-always-fail)

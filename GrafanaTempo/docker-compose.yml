@@ -4,7 +4,7 @@ networks:
 
 services:
   tempo:
-    image: grafana/tempo:2.6.1
+    image: grafana/tempo:2.7.1
     hostname: tempo
     container_name: tempo
     restart: always
@@ -14,7 +14,7 @@ services:
     ports:
       - 3200:3200 # tempo
       - 4317:4317 # otlp grpc
-    #      - 4318:4318  # otlp http
+      - 4318:4318 # otlp http
     networks:
       - demo
     healthcheck:
@@ -40,6 +40,7 @@ services:
       GF_AUTH_ANONYMOUS_ENABLED: true # Allow anonymous access
       GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # Set the role for anonymous users to Admin
       GF_AUTH_BASIC_ENABLED: false # Disable basic auth
+      GF_FEATURE_TOGGLES_ENABLE: traceqlEditor
     ports:
       - 3000:3000
     volumes:
@@ -51,3 +52,16 @@ services:
     depends_on:
       tempo:
         condition: service_healthy
+
+  telemetrygen:
+    image: golang:1.24.1
+    container_name: telemetrygen
+    stdin_open: true
+    tty: true
+    working_dir: /go
+    command: >
+      bash -c "
+      go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest &&
+      exec /bin/bash"
+    networks:
+      - demo

@@ -1,3 +1,6 @@
+# Enables result streaming from Tempo (to Grafana) via HTTP.
+stream_over_http_enabled: true
+
 # https://github.com/grafana/tempo/blob/0c1eb275f028424fd7285742e36a9e954c52a963/example/docker-compose/shared/tempo.yaml
 server:
   http_listen_port: 3200
@@ -7,7 +10,9 @@ distributor:
     otlp:
       protocols:
         http:
+          endpoint: "0.0.0.0:4318"  # Listen to OTLP HTTP on port 4318, on all interfaces.
         grpc:
+          endpoint: "0.0.0.0:4317"  # This example repository only utilises the OTLP gRPC receiver on port 4317, on all interfaces.
 
 ingester:
   max_block_duration: 5m # cut the headblock when this much time passes. this is being set for demo purposes and should probably be left alone normally

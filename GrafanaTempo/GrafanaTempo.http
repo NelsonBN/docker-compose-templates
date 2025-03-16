@@ -6,3 +6,11 @@ GET {{Host}}/ready
 
 ### Metrics
 GET {{Host}}/metrics
+
+
+########## Api ##########
+
+
+### Get A Trace
+
+GET {{Host}}/api/v2/traces/743009d63154c2ff400a45871407f4b8

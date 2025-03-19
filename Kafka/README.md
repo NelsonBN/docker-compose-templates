@@ -19,7 +19,7 @@
 - [Zookeeper](https://hub.docker.com/r/wurstmeister/zookeeper)
 - [Schema Registry](https://hub.docker.com/r/confluentinc/cp-schema-registry)
 - [Control Center](https://hub.docker.com/r/confluentinc/cp-enterprise-control-center)
-- Connect
+- [Kafka Connect](https://hub.docker.com/r/confluentinc/cp-kafka-connect)
 - [ksqldb server](https://hub.docker.com/r/confluentinc/cp-ksqldb-server)
 - [ksqldb cli](https://hub.docker.com/r/confluentinc/cp-ksqldb-cli)
 - [ksql-datagen](https://hub.docker.com/r/confluentinc/ksqldb-examples)

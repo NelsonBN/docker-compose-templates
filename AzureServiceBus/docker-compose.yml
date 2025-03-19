@@ -10,6 +10,7 @@ services:
       SQL_SERVER: sqledge
       MSSQL_SA_PASSWORD: Ab123456789!
       ACCEPT_EULA: Y
+      SQL_WAIT_INTERVAL: 1
     volumes:
       - ./Config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
     ports:
@@ -17,7 +18,8 @@ services:
     networks:
       - demo
     depends_on:
-      - sqledge
+      sqledge:
+        condition: service_healthy # waits for db healthcheck to be successful
 
   sqledge:
     image: mcr.microsoft.com/azure-sql-edge:2.0.0
@@ -27,3 +29,8 @@ services:
       MSSQL_SA_PASSWORD: Ab123456789!
     networks:
       - demo
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -C -U sa -Q "SELECT 1"
+      interval: 5s
+      timeout: 3s
+      retries: 5

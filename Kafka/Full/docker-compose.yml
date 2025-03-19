@@ -50,8 +50,6 @@ services:
     image: confluentinc/cp-schema-registry:7.6.0
     hostname: schema-registry
     container_name: schema-registry
-    depends_on:
-      - broker
     ports:
       - "8081:8081"
     environment:
@@ -60,19 +58,18 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
       - demo
-
-  connect:
-    image: cnfldemos/cp-https://hub.docker.com/r/confluentinc/cp-schema-registryserver-connect-datagen:0.6.2-7.5.0
-    hostname: connect
-    container_name: connect
     depends_on:
       - broker
-      - schema-registry
+
+  kafka-connect:
+    image: confluentinc/cp-kafka-connect:7.9.0
+    hostname: kafka-connect
+    container_name: kafka-connect
     ports:
       - 8083:8083
     environment:
       CONNECT_BOOTSTRAP_SERVERS: "broker:29092"
-      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
       CONNECT_GROUP_ID: compose-connect-group
       CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
@@ -92,6 +89,9 @@ services:
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
     networks:
       - demo
+    depends_on:
+      - broker
+      - schema-registry
 
   control-center:
     image: confluentinc/cp-enterprise-control-center:7.9.0
@@ -100,7 +100,7 @@ services:
     depends_on:
       - broker
       - schema-registry
-      - connect
+      - kafka-connect
       - ksqldb-server
     ports:
       - 9021:9021
@@ -124,7 +124,7 @@ services:
     container_name: ksqldb-server
     depends_on:
       - broker
-      - connect
+      - kafka-connect
     ports:
       - 8088:8088
     environment:
@@ -144,11 +144,11 @@ services:
       - demo
 
   ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:7.6.0
+    image: confluentinc/cp-ksqldb-cli:7.9.0
     container_name: ksqldb-cli
     depends_on:
       - broker
-      - connect
+      - kafka-connect
       - ksqldb-server
     entrypoint: /bin/sh
     tty: true
@@ -163,7 +163,7 @@ services:
       - ksqldb-server
       - broker
       - schema-registry
-      - connect
+      - kafka-connect
     command: "bash -c 'echo Waiting for Kafka to be ready... && \
       cub kafka-ready -b broker:29092 1 40 && \
       echo Waiting for Confluent Schema Registry to be ready... && \

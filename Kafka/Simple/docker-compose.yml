@@ -4,7 +4,7 @@ networks:
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.6.1
+    image: confluentinc/cp-zookeeper:7.9.0
     container_name: zookeeper
     ports:
       - 2181:2181

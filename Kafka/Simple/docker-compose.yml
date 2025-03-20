@@ -43,7 +43,7 @@ services:
         /etc/confluent/docker/run
 
   kafdrop:
-    image: obsidiandynamics/kafdrop:4.0.1
+    image: obsidiandynamics/kafdrop:4.1.0
     container_name: kafdrop
     ports:
       - 9000:9000

@@ -12,7 +12,7 @@
 
 ### References
 - [GitHub - Redis Commander](https://github.com/joeferner/redis-commander)
-- [Website - Redis Commander](https://joeferner.github.io/redis-commander/)
+- [Website - Redis Commander](https://hub.docker.com/r/rediscommander/redis-commander)
 
 
 ## Redis and Redis Insight

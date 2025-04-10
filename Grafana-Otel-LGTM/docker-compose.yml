@@ -4,7 +4,7 @@ networks:
 
 services:
   lgtm:
-    image: grafana/otel-lgtm:0.9.3
+    image: grafana/otel-lgtm:0.10.0
     container_name: lgtm
     restart: always
     ports:

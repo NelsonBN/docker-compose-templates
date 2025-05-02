@@ -4,7 +4,7 @@ networks:
 
 services:
   mongo:
-    image: mongo:8.0.8
+    image: mongo:8.0.9
     container_name: mongo
     restart: always
     # environment:

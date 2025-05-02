@@ -1,4 +1,4 @@
-# Docker compose file templates
+# Docker compose templates
 
 
 ## Databases

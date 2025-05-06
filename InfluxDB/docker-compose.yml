@@ -17,7 +17,7 @@ services:
       - demo
 
   grafana:
-    image: grafana/grafana:11.6.1
+    image: grafana/grafana:12.0.0
     container_name: grafana
     environment:
       #      GF_SECURITY_ADMIN_USER: admin

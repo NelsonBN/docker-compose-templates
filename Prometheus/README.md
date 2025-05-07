@@ -5,7 +5,7 @@
 ## Prometheus
 
 ### Images
-* [Prometheus](https://hub.docker.com/r/prom/prometheus)
-* [Grafana](https://hub.docker.com/r/grafana/grafana)
+- [Prometheus](https://hub.docker.com/r/prom/prometheus)
+- [Grafana](https://hub.docker.com/r/grafana/grafana)
 
 ### [Docker compose file](/Prometheus/docker-compose.yml)

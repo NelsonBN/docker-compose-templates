@@ -1,0 +1,48 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  prometheus:
+    image: prom/prometheus:v3.3.1
+    container_name: prometheus
+    restart: always
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --enable-feature=native-histograms
+      - --web.enable-remote-write-receiver # This is necessary to k6 can send metrics to prometheus
+    networks:
+      - demo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9090/-/healthy",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 3s
+      retries: 5
+
+  k6:
+    image: grafana/k6:1.0.0
+    container_name: k6
+    environment:
+      K6_PROMETHEUS_RW_SERVER_URL: http://prometheus:9090/api/v1/write
+      K6_PROMETHEUS_RW_TREND_STATS: p(95),p(99),min,max
+      K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM: true
+    volumes:
+      - ./tests.js:/scripts/script.js
+    working_dir: /scripts
+    command: run -o experimental-prometheus-rw /scripts/script.js
+    networks:
+      - demo
+    depends_on:
+      prometheus:
+        condition: service_healthy

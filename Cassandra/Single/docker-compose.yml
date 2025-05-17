@@ -4,9 +4,5 @@ services:
     container_name: cassandra
     ports:
       - 9042:9042
-    # environment:
-    #   - CASSANDRA_CLUSTER_NAME=myCassandraCluster
-    #   - CASSANDRA_DC=myDataCenter
-    #   - CASSANDRA_RACK=myRack
     # volumes:
     #   - cassandra_data:/var/lib/cassandra

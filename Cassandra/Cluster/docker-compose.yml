@@ -1,0 +1,99 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  cassandra1:
+    image: cassandra:5.0.4
+    container_name: cassandra1
+    ports:
+      - 9042:9042
+    networks:
+      - demo
+    environment: &environments
+      CASSANDRA_SEEDS: "cassandra1,cassandra2"
+      CASSANDRA_CLUSTER_NAME: demo-cluster
+      CASSANDRA_DC: DC1
+      CASSANDRA_RACK: RACK1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      CASSANDRA_NUM_TOKENS: 128
+      JVM_EXTRA_OPTS: "-Xms256M -Xmx512M"
+
+  cassandra2:
+    image: cassandra:5.0.4
+    container_name: cassandra2
+    ports:
+      - 9043:9042
+    networks:
+      - demo
+    environment: *environments
+    depends_on:
+      cassandra1:
+        condition: service_started
+
+  cassandra3:
+    image: cassandra:5.0.4
+    container_name: cassandra3
+    ports:
+      - 9044:9042
+    networks:
+      - demo
+    environment: *environments
+    depends_on:
+      cassandra2:
+        condition: service_started
+
+
+
+
+
+# networks:
+#   cassandraCluster:
+
+
+# services:
+#   cassandra10:
+#     image: cassandra:latest
+#     container_name: cassandra10
+#     hostname: cassandra10
+#     networks:
+#       - cassandraCluster
+#     ports:
+#       - "9042:9042"
+#     environment: &environment
+#       CASSANDRA_SEEDS: "cassandra10,cassandra20"
+#       CASSANDRA_CLUSTER_NAME: MyTestCluster
+#       CASSANDRA_DC: DC1
+#       CASSANDRA_RACK: RACK1
+#       CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+#       CASSANDRA_NUM_TOKENS: 128
+#       JVM_EXTRA_OPTS: "-Xms256M -Xmx512M"
+# #    mem_limit: 1g
+
+#   cassandra20:
+#     image: cassandra:latest
+#     container_name: cassandra20
+#     hostname: cassandra20
+#     networks:
+#       - cassandraCluster
+#     ports:
+#       - "9043:9042"
+#     environment: *environment
+#     depends_on:
+#       cassandra10:
+#         condition: service_started
+# #   mem_limit: 1g
+
+#   cassandra30:
+#     image: cassandra:latest
+#     container_name: cassandra30
+#     hostname: cassandra30
+#     networks:
+#       - cassandraCluster
+#     ports:
+#       - "9044:9042"
+#     environment: *environment
+#     depends_on:
+#       cassandra20:
+#        condition: service_started
+# #   mem_limit: 1g

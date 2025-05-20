@@ -4,7 +4,7 @@ networks:
 
 services:
   oteltui:
-    image: ymtdzzz/otel-tui:v0.4.10
+    image: ymtdzzz/otel-tui:v0.4.11
     container_name: otel-tui
     stdin_open: true
     tty: true

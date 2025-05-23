@@ -5,7 +5,11 @@ datasources:
     type: influxdb
     access: proxy
     url: http://influxdb:8086
-    database: demo
-#    user: user
-#    password: password
+    jsonData:
+      version: Flux
+      organization: demo-org
+      defaultBucket: demo-bucket
+      tlsSkipVerify: true
+    secureJsonData:
+      token: demo-token
     isDefault: true

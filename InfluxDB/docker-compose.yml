@@ -10,9 +10,14 @@ services:
     ports:
       - 8086:8086
     environment:
-      INFLUXDB_DB: demo
-    #    volumes:
-    #      - ./out/influxdb:/var/lib/influxdb
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: adminpassword
+      DOCKER_INFLUXDB_INIT_ORG: demo-org
+      DOCKER_INFLUXDB_INIT_BUCKET: demo-bucket
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: demo-token
+    # volumes:
+    #   - ./out/influxdb:/var/lib/influxdb2
     networks:
       - demo
 
@@ -20,8 +25,6 @@ services:
     image: grafana/grafana:12.0.1
     container_name: grafana
     environment:
-      #      GF_SECURITY_ADMIN_USER: admin
-      #      GF_SECURITY_ADMIN_PASSWORD: a123456789
       TZ: Europe/Lisbon
       GF_AUTH_ANONYMOUS_ENABLED: true # Allow anonymous access
       GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # Set the role for anonymous users to Admin

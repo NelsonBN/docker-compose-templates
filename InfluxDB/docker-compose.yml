@@ -18,6 +18,12 @@ services:
       DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: demo-token
     # volumes:
     #   - ./out/influxdb:/var/lib/influxdb2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
+      interval: 5s
+      timeout: 10s
+      start_period: 15s
+      retries: 5
     networks:
       - demo
 
@@ -35,8 +41,8 @@ services:
       - ./Grafana/data-source.yml:/etc/grafana/provisioning/datasources/data-source.yml # Data source configurations
       - ./Grafana/dashboards:/etc/grafana/provisioning/dashboards # Folder containing dashboards
       - ./Grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml # Dashboard configurations
-    #      - ./out/grafana:/var/lib/grafana
     networks:
       - demo
     depends_on:
-      - influxdb
+      influxdb:
+        condition: service_healthy

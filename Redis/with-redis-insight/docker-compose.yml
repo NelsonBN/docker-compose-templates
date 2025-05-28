@@ -19,7 +19,7 @@ services:
       retries: 5
 
   redis-insight:
-    image: redislabs/redisinsight:2.68.0
+    image: redislabs/redisinsight:2.70.0
     container_name: redis-insight
     restart: always
     ports:

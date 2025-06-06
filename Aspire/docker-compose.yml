@@ -16,7 +16,7 @@ services:
       - demo
 
   telemetrygen:
-    image: golang:1.24.3
+    image: golang:1.24.4
     container_name: telemetrygen
     stdin_open: true
     tty: true

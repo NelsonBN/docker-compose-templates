@@ -15,7 +15,7 @@ services:
       - demo
 
   kafka:
-    image: confluentinc/cp-kafka:7.9.1
+    image: confluentinc/cp-kafka:8.0.0
     container_name: kafka
     ports:
       - 9092:9092

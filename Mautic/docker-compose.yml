@@ -4,7 +4,7 @@ networks:
 
 services:
   mautic:
-    image: mautic/mautic:5.2.6-apache
+    image: mautic/mautic:5.2.7-apache
     container_name: mautic
     restart: always
     ports:

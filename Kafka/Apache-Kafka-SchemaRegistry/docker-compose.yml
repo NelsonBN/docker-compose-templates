@@ -1,0 +1,84 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  kafka:
+    image: apache/kafka:4.0.0
+    container_name: kafka
+    ports:
+      - 9092:9092
+      - 29092:29092
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller # The node acts as both broker and controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093 # Ports for broker and controller
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,EXTERNAL://kafka:29092 # Internal and external listeners
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT # Use PLAINTEXT for inter-broker communication
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER # Listener name for inter-controller communication
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT # Security protocol for listeners
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093 # Quorum voters for the controller in KRaft mode
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # Replication factor for the offsets topic
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1 # Replication factor for transaction logs
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 # Minimum in-sync replicas for transactional logs
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0 # Initial delay before consumer group rebalancing
+      KAFKA_NUM_PARTITIONS: 1 # Default number of partitions for new topics
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "./opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 > /dev/null 2>&1",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - demo
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:8.0.0
+    hostname: schema-registry
+    container_name: schema-registry
+    ports:
+      - 8081:8081
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:29092'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    networks:
+      - demo
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  kafka-init:
+    image: apache/kafka:4.0.0
+    container_name: kafka-init
+    restart: no
+    networks:
+      - demo
+    depends_on:
+      kafka:
+        condition: service_healthy
+    command:
+      - bash
+      - -c
+      - |
+        sleep 10
+        echo "########################## CREATING TOPICS... ##########################"
+        /opt/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:29092 --replication-factor 1 --partitions 1 --topic demo.topic.boo --if-not-exists
+        /opt/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:29092 --replication-factor 1 --partitions 1 --topic demo.topic.foo --if-not-exists
+        echo "########################## TOPICS CREATED. ##########################"
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:4.1.0
+    container_name: kafdrop
+    ports:
+      - 9000:9000
+    environment:
+      KAFKA_BROKERCONNECT: kafka:29092
+    networks:
+      - demo
+    depends_on:
+      kafka:
+        condition: service_healthy

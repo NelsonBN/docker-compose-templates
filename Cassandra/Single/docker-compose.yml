@@ -1,6 +1,6 @@
 services:
   cassandra:
-    image: cassandra:5.0.4
+    image: cassandra:5.0.5
     container_name: cassandra
     ports:
       - 9042:9042

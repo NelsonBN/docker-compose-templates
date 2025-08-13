@@ -1,6 +1,6 @@
 services:
   k6:
-    image: grafana/k6:1.1.0
+    image: grafana/k6:1.2.1
     container_name: k6
     volumes:
       - ./tests.js:/scripts/script.js

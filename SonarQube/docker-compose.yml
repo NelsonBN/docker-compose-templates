@@ -4,7 +4,7 @@ networks:
 
 services:
   sonarqube:
-    image: sonarqube:25.8.0.112029-community
+    image: sonarqube:25.9.0.112764-community
     container_name: sonarqube
     restart: always
     ports:

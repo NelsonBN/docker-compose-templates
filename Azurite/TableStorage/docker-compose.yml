@@ -1,0 +1,40 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:3.35.0 # https://github.com/Azure/Azurite
+    container_name: azurite
+    restart: always
+    command: "azurite-table --tableHost 0.0.0.0 --tablePort 10002"
+    ports:
+      - 10002:10002 # Table service
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider --server-response http://0.0.0.0:10002/devstoreaccount1 2>&1 | grep -q 'HTTP.*[2-4][0-9][0-9]'"]
+      interval: 15s
+      timeout: 3s
+      retries: 20
+    networks:
+      - demo
+
+  init-blob-container:
+    image: mcr.microsoft.com/azure-cli:latest
+    container_name: init-blob-container
+    restart: on-failure
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1;
+      TABLE_STORAGE_NAME: DemoTableContainer
+    command:
+      - bash
+      - -c
+      - >-
+        (echo "########################## CREATING TABLE... ##########################" &&
+        echo "#### Attempting to create Table..." &&
+        az storage table create --name $$TABLE_STORAGE_NAME --connection-string $$AZURE_STORAGE_CONNECTION_STRING &&
+        echo "########################## TABLE CREATED ##########################")
+    networks:
+      - demo
+    depends_on:
+      azurite:
+        condition: service_healthy

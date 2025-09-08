@@ -12,10 +12,9 @@ services:
       - 10000:10000 # Blob service
     # volumes:
     #   - ./azurite-blob:/data
-    # required, see https://github.com/Azure/Azurite/issues/1666
     healthcheck:
       test: nc localhost 10000 -z
-      interval: 5s
+      interval: 15s
       timeout: 3s
       retries: 20
     networks:

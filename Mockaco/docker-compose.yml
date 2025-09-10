@@ -1,6 +1,6 @@
 services:
   mockaco:
-    image: natenho/mockaco:1.9.9
+    image: natenho/mockaco:1.9.14
     container_name: mockaco
     restart: always
     ports:

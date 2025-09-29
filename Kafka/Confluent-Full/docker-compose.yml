@@ -47,7 +47,7 @@ services:
       - demo
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:8.0.0
+    image: confluentinc/cp-schema-registry:8.0.1
     hostname: schema-registry
     container_name: schema-registry
     ports:

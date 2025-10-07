@@ -23,7 +23,7 @@ services:
       start_period: 20s
 
   cosmosdb-init:
-    image: python:3.13.7-slim
+    image: python:3.14.0-slim
     container_name: cosmosdb-init
     environment:
       - URI=http://cosmosdb:8081

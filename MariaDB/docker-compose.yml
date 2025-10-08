@@ -31,7 +31,7 @@ services:
       - demo
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2.2
+    image: phpmyadmin/phpmyadmin:5.2.3
     container_name: phpmyadmin
     restart: always
     ports:

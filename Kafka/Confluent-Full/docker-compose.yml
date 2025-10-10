@@ -144,7 +144,7 @@ services:
       - demo
 
   ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:8.0.1
+    image: confluentinc/cp-ksqldb-cli:8.0.2
     container_name: ksqldb-cli
     depends_on:
       - broker

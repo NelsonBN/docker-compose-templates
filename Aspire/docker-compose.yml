@@ -4,7 +4,7 @@ networks:
 
 services:
   aspire:
-    image: mcr.microsoft.com/dotnet/aspire-dashboard:9.4.0-amd64
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:9.5.0-amd64
     container_name: aspire-dashboard
     restart: always
     environment:

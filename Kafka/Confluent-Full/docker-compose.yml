@@ -180,7 +180,7 @@ services:
       - demo
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:8.0.1
+    image: confluentinc/cp-kafka-rest:8.1.0
     depends_on:
       - broker
       - schema-registry

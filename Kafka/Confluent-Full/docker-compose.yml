@@ -16,7 +16,7 @@ services:
       - demo
 
   broker:
-    image: confluentinc/cp-server:8.0.2
+    image: confluentinc/cp-server:8.1.0
     hostname: broker
     container_name: broker
     depends_on:

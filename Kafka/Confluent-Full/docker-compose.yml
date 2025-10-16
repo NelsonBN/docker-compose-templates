@@ -119,7 +119,7 @@ services:
       - demo
 
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:8.0.2
+    image: confluentinc/cp-ksqldb-server:8.1.0
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:

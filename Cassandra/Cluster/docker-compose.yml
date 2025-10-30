@@ -4,7 +4,7 @@ networks:
 
 services:
   cassandra1:
-    image: cassandra:5.0.5
+    image: cassandra:5.0.6
     container_name: cassandra1
     ports:
       - 9042:9042
@@ -20,7 +20,7 @@ services:
       JVM_EXTRA_OPTS: "-Xms256M -Xmx512M"
 
   cassandra2:
-    image: cassandra:5.0.5
+    image: cassandra:5.0.6
     container_name: cassandra2
     ports:
       - 9043:9042
@@ -32,7 +32,7 @@ services:
         condition: service_started
 
   cassandra3:
-    image: cassandra:5.0.5
+    image: cassandra:5.0.6
     container_name: cassandra3
     ports:
       - 9044:9042

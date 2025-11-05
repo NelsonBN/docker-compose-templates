@@ -1,0 +1,11 @@
+services:
+  wiremock:
+    image: wiremock/wiremock:3.13.1-alpine
+    container_name: wiremock
+    ports:
+      - 8080:8080
+    volumes:
+      - ./ResponseMocks:/home/wiremock/mappings
+    command:
+      - --global-response-templating
+      - --verbose

@@ -1,0 +1,13 @@
+@host = http://localhost:8080
+
+
+###
+
+POST {{host}}/api/users
+Accept: application/json
+
+{
+    "id": "44238234-7df5-470e-a110-7c4b42c2e4a5",
+    "name": "john Doe",
+    "email": "john.doe@fake.com"
+}

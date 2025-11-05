@@ -1,0 +1,23 @@
+{
+  "mappings": [
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "POST",
+        "url": "/api/users"
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "id": "{{jsonPath request.body '$.id'}}",
+          "name": "{{jsonPath request.body '$.name'}}",
+          "email": "{{jsonPath request.body '$.email'}}",
+          "status": "{{#eq (jsonPath request.body '$.name') 'Nelson'}}APPROVED{{else}}PENDING{{/eq}}"
+        }
+      }
+    }
+  ]
+}

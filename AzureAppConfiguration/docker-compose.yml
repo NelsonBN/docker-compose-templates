@@ -1,0 +1,14 @@
+services:
+  app-configuration:
+    image: mcr.microsoft.com/azure-app-configuration/app-configuration-emulator:1.0.0-preview
+    container_name: app-configuration
+    ports:
+      - 8483:8483 # UI
+    environment:
+      - Tenant:AnonymousAuthEnabled=true
+      - Authentication:Anonymous:AnonymousUserRole=Owner
+      - Tenant:HmacSha256Enabled=true
+      - Tenant:AccessKeys:0:Id=demo-id
+      - Tenant:AccessKeys:0:Secret=abcdefghijklmnopqrstuvwxyz1234567890
+    # volumes:
+    #   - ./data/azure-app-config:/app/.aace

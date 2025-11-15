@@ -1,0 +1,40 @@
+networks:
+  demo:
+    driver: bridge
+
+services:
+  documentdb:
+    image: ghcr.io/documentdb/documentdb/documentdb-local:latest
+    container_name: documentdb
+    restart: always
+    ports:
+      - 10260:10260
+    command: --username demouser --password demopassword
+    networks:
+      - demo
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -p 9712 -U documentdb || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  mongoku:
+    image: huggingface/mongoku:2.4.4
+    container_name: mongoku
+    restart: always
+    ports:
+      - 3100:3100
+    environment:
+      MONGOKU_DEFAULT_HOST: mongodb://demouser:demopassword@documentdb:10260/?authSource=admin&tls=true&tlsAllowInvalidCertificates=true
+    networks:
+      - demo
+    depends_on:
+      documentdb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 0.0.0.0 3100 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

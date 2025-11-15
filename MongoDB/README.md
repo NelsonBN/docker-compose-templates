@@ -8,7 +8,7 @@
 - [MongoDB Server](https://hub.docker.com/_/mongo)
 - [Mongo Express](https://hub.docker.com/_/mongo-express)
 
-### [Docker compose file](/Mongo/docker-compose.yml)
+### [Docker compose file](/MongoDB/docker-compose.yml)
 
 ### References
 - [GitHub - Mongo Express](https://github.com/mongo-express/mongo-express-docker)

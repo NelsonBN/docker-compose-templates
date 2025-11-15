@@ -2,7 +2,7 @@
 [[Home]](/README.md)
 
 
-## Mongo
+## MongoDB
 
 ### Images
 - [MongoDB Server](https://hub.docker.com/_/mongo)

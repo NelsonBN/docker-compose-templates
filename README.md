@@ -6,7 +6,7 @@
 - [MariaDB](/MariaDB/README.md)
 - [Postgres](/Postgres/README.md)
 - [MSSQL Server](/MSSQLServer/README.md)
-- [Mongo](/Mongo/README.md)
+- [MongoDB](/MongoDB/README.md)
 - [Redis](/Redis/README.md)
 - [Cassandra](/Cassandra/README.md)
 - [CosmosDB](/CosmosDB/README.md)

@@ -11,3 +11,24 @@ Accept: application/json
     "name": "john Doe",
     "email": "john.doe@fake.com"
 }
+
+
+### ADMIN
+
+### Health Check
+GET {{host}}/__admin/health
+
+#### Mappings
+GET {{host}}/__admin/mappings
+
+#### Requests
+GET {{host}}/__admin/requests
+
+#### Reset
+POST {{host}}/__admin/reset
+
+#### Shutdown
+POST {{host}}/__admin/shutdown
+
+#### Scenarios
+GET {{host}}/__admin/scenarios

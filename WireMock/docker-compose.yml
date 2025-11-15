@@ -9,3 +9,13 @@ services:
     command:
       - --global-response-templating
       - --verbose
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --spider --quiet http://localhost:8080/__admin/health || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 15s
+      retries: 5

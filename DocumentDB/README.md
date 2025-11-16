@@ -2,7 +2,7 @@
 [[Home]](/README.md)
 
 
-## MongoDB
+## DocumentDB
 
 ### Images
 - [DocumentDB](https://github.com/orgs/microsoft/packages/container/package/documentdb%2Fdocumentdb-local)

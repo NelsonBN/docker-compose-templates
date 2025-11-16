@@ -3,9 +3,9 @@ networks:
     driver: bridge
 
 services:
-  mongo:
+  mongodb:
     image: mongo:8.2.1
-    container_name: mongo
+    container_name: mongodb
     restart: always
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: root
@@ -33,7 +33,7 @@ services:
       ME_CONFIG_BASICAUTH: false
       # ME_CONFIG_BASICAUTH_USERNAME: guest # mongo-express web login username
       # ME_CONFIG_BASICAUTH_PASSWORD: guest # mongo-express web login password
-      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/ # mongo-express web login mongodb url
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/ # mongo-express web login mongodb url
       # ME_CONFIG_MONGODB_ENABLE_ADMIN: true
       # ME_CONFIG_MONGODB_PORT: 27017 # MongoDB port
       # ME_CONFIG_MONGODB_ADMINUSERNAME: root # MongoDB username
@@ -41,5 +41,5 @@ services:
     networks:
       - demo
     depends_on:
-      mongo:
+      mongodb:
         condition: service_healthy

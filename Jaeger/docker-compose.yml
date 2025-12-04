@@ -4,7 +4,7 @@ networks:
 
 services:
   jaeger:
-    image: jaegertracing/all-in-one:1.75.0
+    image: jaegertracing/all-in-one:1.76.0
     container_name: jaeger
     restart: always
     ports:

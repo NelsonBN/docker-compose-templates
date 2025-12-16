@@ -4,7 +4,7 @@ networks:
 
 services:
   rabbitmq:
-    image: rabbitmq:4.2.1-management
+    image: rabbitmq:4.2.2-management
     container_name: rabbitmq
     restart: always
     ports:

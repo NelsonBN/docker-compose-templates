@@ -4,7 +4,7 @@ networks:
 
 services:
   servicebus-emulator:
-    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:1.1.2
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:2.0.0
     container_name: servicebus-emulator
     environment:
       SQL_SERVER: sqledge

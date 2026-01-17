@@ -1,0 +1,4 @@
+@Host = http://localhost:5300
+
+### Ready
+GET {{Host}}/health

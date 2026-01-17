@@ -14,10 +14,12 @@ services:
       - ./Config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
     ports:
       - 5672:5672
+      - 5300:5300
     networks:
       - demo
     depends_on:
-      - sqledge
+      sqledge:
+        condition: service_healthy
 
   sqledge:
     image: mcr.microsoft.com/azure-sql-edge:2.0.0
@@ -25,5 +27,11 @@ services:
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: Ab123456789!
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Ab123456789! -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     networks:
       - demo

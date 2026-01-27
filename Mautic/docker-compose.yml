@@ -4,7 +4,7 @@ networks:
 
 services:
   mautic:
-    image: mautic/mautic:6.0.7-apache
+    image: mautic/mautic:7.0.0-apache
     container_name: mautic
     restart: always
     ports:
@@ -30,7 +30,7 @@ services:
         condition: service_healthy
 
   mysql:
-    image: mysql:9.5.0
+    image: mysql:9.6.0
     container_name: mysql
     restart: always
     ports:

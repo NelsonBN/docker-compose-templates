@@ -4,7 +4,7 @@ networks:
 
 services:
   oteltui:
-    image: ymtdzzz/otel-tui:v0.6.3
+    image: ymtdzzz/otel-tui:v0.7.0
     container_name: otel-tui
     stdin_open: true
     tty: true
@@ -15,7 +15,7 @@ services:
       - demo
 
   telemetrygen:
-    image: golang:1.26rc2
+    image: golang:1.26rc3
     container_name: telemetrygen
     stdin_open: true
     tty: true

@@ -5,7 +5,7 @@ networks:
 
 services:
   loki:
-    image: grafana/loki:3.6.4
+    image: grafana/loki:3.6.5
     container_name: loki
     restart: always
     ports:
@@ -34,7 +34,7 @@ services:
       retries: 5
 
   promtail:
-    image: grafana/promtail:3.6.4
+    image: grafana/promtail:3.6.5
     container_name: promtail
     ports:
       - 9080:9080

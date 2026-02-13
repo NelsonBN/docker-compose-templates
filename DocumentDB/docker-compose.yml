@@ -20,7 +20,7 @@ services:
       start_period: 30s
 
   mongoku:
-    image: huggingface/mongoku:2.5.0
+    image: huggingface/mongoku:2.6.0
     container_name: mongoku
     restart: always
     ports:

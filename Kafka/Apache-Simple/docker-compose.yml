@@ -4,7 +4,7 @@ networks:
 
 services:
   kafka:
-    image: apache/kafka:4.0.0
+    image: apache/kafka:4.2.0
     container_name: kafka
     ports:
       - 9092:9092
@@ -36,7 +36,7 @@ services:
       - demo
 
   kafka-init:
-    image: apache/kafka:4.0.0
+    image: apache/kafka:4.2.0
     container_name: kafka-init
     restart: no
     networks:

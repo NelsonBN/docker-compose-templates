@@ -16,7 +16,7 @@ services:
       - demo
 
   broker:
-    image: confluentinc/cp-server:8.1.1
+    image: confluentinc/cp-server:8.2.0
     hostname: broker
     container_name: broker
     depends_on:
@@ -47,7 +47,7 @@ services:
       - demo
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:8.1.1
+    image: confluentinc/cp-schema-registry:8.2.0
     hostname: schema-registry
     container_name: schema-registry
     ports:
@@ -62,7 +62,7 @@ services:
       - broker
 
   kafka-connect:
-    image: confluentinc/cp-kafka-connect:8.1.1
+    image: confluentinc/cp-kafka-connect:8.2.0
     hostname: kafka-connect
     container_name: kafka-connect
     ports:
@@ -119,7 +119,7 @@ services:
       - demo
 
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:8.1.1
+    image: confluentinc/cp-ksqldb-server:8.2.0
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -180,7 +180,7 @@ services:
       - demo
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:8.1.1
+    image: confluentinc/cp-kafka-rest:8.2.0
     depends_on:
       - broker
       - schema-registry

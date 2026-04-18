@@ -1,0 +1,51 @@
+@KeycloakHost = http://localhost:8080
+@Realm = demo-realm
+@Username = user
+@Password = user
+
+
+##### Keycloak Configuration #####
+GET {{KeycloakHost}}/realms/{{Realm}}/.well-known/openid-configuration
+
+
+##### Get Token - Password Grant #####
+@ClientIdUnrecommended = public-unrecommended-client
+
+# @name loginPassword
+POST {{KeycloakHost}}/realms/{{Realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&client_id={{ClientIdUnrecommended}}
+&username={{Username}}
+&password={{Password}}
+&scope=openid
+
+
+### Get Token - Refresh Token
+POST {{KeycloakHost}}/realms/{{Realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token
+&client_id={{ClientIdUnrecommended}}
+&refresh_token={{loginPassword.response.body.refresh_token}}
+
+
+### Get User Info
+GET {{KeycloakHost}}/realms/{{Realm}}/protocol/openid-connect/userinfo
+Accept: application/json
+Authorization: Bearer {{loginPassword.response.body.access_token}}
+
+
+
+##### Get Token - Client Credentials Grant #####
+@ClientIdServer = server-client
+@ClientSecret = SnlWMBZMzuCTgwmeVKUYaNtjPCQlH0bC
+
+POST {{KeycloakHost}}/realms/{{Realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id={{ClientIdServer}}
+&client_secret={{ClientSecret}}
+&scope=openid

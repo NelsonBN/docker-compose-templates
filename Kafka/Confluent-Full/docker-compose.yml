@@ -47,7 +47,7 @@ services:
       - demo
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:8.2.0
+    image: confluentinc/cp-schema-registry:8.2.1
     hostname: schema-registry
     container_name: schema-registry
     ports:
@@ -119,7 +119,7 @@ services:
       - demo
 
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:8.2.0
+    image: confluentinc/cp-ksqldb-server:8.2.1
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:

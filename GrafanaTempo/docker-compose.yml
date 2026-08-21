@@ -33,7 +33,7 @@ services:
       retries: 10
 
   grafana:
-    image: grafana/grafana:13.1.4
+    image: grafana/grafana:13.2.0
     container_name: grafana
     environment:
       TZ: Europe/Lisbon

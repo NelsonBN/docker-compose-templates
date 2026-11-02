@@ -71,7 +71,7 @@ services:
         echo "########################## TOPICS CREATED. ##########################"
 
   kafdrop:
-    image: obsidiandynamics/kafdrop:4.3.0
+    image: obsidiandynamics/kafdrop:4.3.1
     container_name: kafdrop
     ports:
       - 9000:9000

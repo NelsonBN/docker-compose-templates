@@ -16,7 +16,7 @@ services:
       - demo
 
   broker:
-    image: confluentinc/cp-server:8.3.2
+    image: confluentinc/cp-server:8.4.0
     hostname: broker
     container_name: broker
     depends_on:
@@ -47,7 +47,7 @@ services:
       - demo
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:8.3.2
+    image: confluentinc/cp-schema-registry:8.4.0
     hostname: schema-registry
     container_name: schema-registry
     ports:

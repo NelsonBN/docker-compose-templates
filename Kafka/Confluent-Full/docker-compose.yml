@@ -16,7 +16,7 @@ services:
       - demo
 
   broker:
-    image: confluentinc/cp-server:8.4.0
+    image: confluentinc/cp-server:8.4.1
     hostname: broker
     container_name: broker
     depends_on:
@@ -180,7 +180,7 @@ services:
       - demo
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:8.4.0
+    image: confluentinc/cp-kafka-rest:8.4.1
     depends_on:
       - broker
       - schema-registry

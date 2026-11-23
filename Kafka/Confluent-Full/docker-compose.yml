@@ -62,7 +62,7 @@ services:
       - broker
 
   kafka-connect:
-    image: confluentinc/cp-kafka-connect:8.4.0
+    image: confluentinc/cp-kafka-connect:8.4.1
     hostname: kafka-connect
     container_name: kafka-connect
     ports:
